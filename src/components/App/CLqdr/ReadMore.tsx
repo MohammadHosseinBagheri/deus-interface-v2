@@ -39,7 +39,7 @@ const ReadMore = () => {
         <RowBetween>
           <span>cLQDR</span>
           <ExternalLink href="https://docs.deus.finance/clqdr/what-is-clqdr">
-            Read more <Image width={8} height={8} src={ExternalLinkImage} />
+            Read more <Image alt="read more" width={8} height={8} src={ExternalLinkImage} />
           </ExternalLink>
         </RowBetween>
         <p style={{ marginTop: 20 }}>...</p>

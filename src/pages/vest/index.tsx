@@ -26,7 +26,7 @@ import useDistRewards, { useVeMigrationData } from 'hooks/useDistRewards'
 
 import Hero from 'components/Hero'
 import { PrimaryButtonWide } from 'components/Button'
-import { RowFixed, RowBetween, Row } from 'components/Row'
+import { RowFixed, RowBetween } from 'components/Row'
 import StatsHeader from 'components/StatsHeader'
 import { Container } from 'components/App/StableCoin'
 import { useSearch, SearchField, Table, TopBorder, TopBorderWrap, ButtonText } from 'components/App/Vest'
@@ -92,25 +92,19 @@ const FirstRowWrapper = styled.div`
   justify-content: space-between;
   width: 100%;
   gap: 10px;
-  align-items: center;
-  div {
-    width: fit-content;
-  }
+`
+const ExternalLinkContainer = styled.div`
+  align-self: center;
+  display: flex;
+  background: none;
   a {
-    margin-right: 20px;
     color: ${({ theme }) => theme.text2};
     &:hover {
       color: ${({ theme }) => theme.text2};
       text-decoration: underline;
     }
   }
-  ${({ theme }) => theme.mediaWidth.upToMedium`
-   a {
-    font-size:14px;
-  }
-  `}
 `
-const RightSideContainer = styled(Row)``
 
 export default function Vest() {
   const { chainId, account } = useWeb3React()
@@ -243,12 +237,7 @@ export default function Vest() {
         <UpperRow>
           <FirstRowWrapper>
             <SearchField searchProps={searchProps} />
-            <RightSideContainer>
-              <ExternalLink href="https://docs.deus.finance/xdeus/vedeus-greater-than-xdeus-migrator">
-                Read more <Image width={10} height={10} src={ExternalLinkImage} />
-              </ExternalLink>
-              {getMainContent()}
-            </RightSideContainer>
+            {getMainContent()}
           </FirstRowWrapper>
           {getClaimAllButton()}
         </UpperRow>
@@ -256,18 +245,13 @@ export default function Vest() {
     } else {
       return (
         <UpperRow>
-          <FirstRowWrapper>
+          <div>
             <SearchField searchProps={searchProps} />
-            <RightSideContainer>
-              <ExternalLink href="https://docs.deus.finance/xdeus/vedeus-greater-than-xdeus-migrator">
-                Read more <Image width={10} height={10} src={ExternalLinkImage} />
-              </ExternalLink>
-              <ButtonWrapper>
-                {getClaimAllButton()}
-                {getMainContent()}
-              </ButtonWrapper>
-            </RightSideContainer>
-          </FirstRowWrapper>
+          </div>
+          <ButtonWrapper>
+            {getClaimAllButton()}
+            {getMainContent()}
+          </ButtonWrapper>
         </UpperRow>
       )
     }
@@ -277,6 +261,17 @@ export default function Vest() {
     () => [
       { name: 'DEUS Price', value: formatDollarAmount(parseFloat(deusPrice), 2) },
       { name: 'veDEUS Supply', value: formatAmount(parseFloat(lockedVeDEUS), 0) },
+      {
+        name: '',
+        value: (
+          <ExternalLinkContainer>
+            <ExternalLink href="https://docs.deus.finance/xdeus/vedeus-greater-than-xdeus-migrator">
+              Read more <Image alt="read more" width={10} height={10} src={ExternalLinkImage} />
+            </ExternalLink>
+          </ExternalLinkContainer>
+        ),
+        hasOwnColor: true,
+      },
     ],
     [deusPrice, lockedVeDEUS]
   )

@@ -70,7 +70,18 @@ export const TopBorder = styled.div`
   width: 100%;
   display: flex;
 `
-
+const ExternalLinkContainer = styled.div`
+  align-self: center;
+  display: flex;
+  background: none;
+  a {
+    color: ${({ theme }) => theme.text2};
+    &:hover {
+      color: ${({ theme }) => theme.text2};
+      text-decoration: underline;
+    }
+  }
+`
 export default function Vest() {
   const deusPrice = useDeusPrice()
   const { swapRatio } = useVDeusStats()
@@ -82,12 +93,13 @@ export default function Vest() {
       {
         name: '',
         value: (
-          <div style={{ alignSelf: 'center', display: 'flex' }}>
+          <ExternalLinkContainer>
             <ExternalLink href="https://docs.deus.finance/xdeus/xdeus">
-              Read more <Image width={10} height={10} src={ExternalLinkImage} />
+              Read more <Image alt="read more" width={10} height={10} src={ExternalLinkImage} />
             </ExternalLink>
-          </div>
+          </ExternalLinkContainer>
         ),
+        hasOwnColor: true,
       },
     ],
     [deusPrice, swapRatio]

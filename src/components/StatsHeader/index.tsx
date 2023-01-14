@@ -67,12 +67,15 @@ const Name = styled.div`
   `};
 `
 
-const Value = styled.div`
+const Value = styled.div<{ hasOwnColor?: boolean }>`
   font-weight: 500;
   font-size: 24px;
-  background: ${({ theme }) => theme.deusColor};
+
+  ${({ hasOwnColor, theme }) =>
+    !hasOwnColor &&
+    `background: ${theme.deusColor};
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;`}
 
   ${({ theme }) => theme.mediaWidth.upToSmall`
     font-size: 16px;
@@ -229,6 +232,7 @@ export default function StatsHeader({
     link?: string
     hasTooltip?: boolean
     toolTipInfo?: string
+    hasOwnColor?: boolean
   }[]
   hasBox?: boolean
   pid?: number
@@ -254,7 +258,7 @@ export default function StatsHeader({
           />
         </ItemBox2>
       )}
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         {items &&
           items.map((item, index) => (
             <Item key={index} rightBorder={index < items.length - 1 || hasBox}>
@@ -269,7 +273,9 @@ export default function StatsHeader({
                     },
                   })}
                 >
-                  <Value style={{ alignSelf: 'center' }}>{item.value}</Value>
+                  <Value hasOwnColor={item.hasOwnColor} style={{ alignSelf: 'center' }}>
+                    {item.value}
+                  </Value>
                   {item.hasTooltip ? (
                     <>
                       <InfoIcon size={24} />

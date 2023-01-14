@@ -111,7 +111,7 @@ export default function Stake() {
           <Cell style={{ height: 'fit-content', textAlign: 'left', color: '#6F7380' }}>Reward Tokens</Cell>
           <ReadMoreContainer>
             <ExternalLink href="https://docs.deus.finance/staking-and-farming/deus-finance">
-              Read more <Image width={10} height={10} src={ExternalLinkImage} />
+              Read more <Image alt="read more" width={10} height={10} src={ExternalLinkImage} />
             </ExternalLink>
           </ReadMoreContainer>
         </Row>
